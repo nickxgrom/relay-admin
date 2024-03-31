@@ -64,6 +64,17 @@ module.exports = {
             "multiline": {
                 "max": 1
             }
-        }]
+        }],
+        "vue/html-closing-bracket-newline": [
+            "error",
+            {
+                "singleline": "never",
+                "multiline": "always",
+                "selfClosingTag": {
+                    "singleline": "never",
+                    "multiline": "always"
+                }
+            }
+        ]
     }
 }

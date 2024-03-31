@@ -1,6 +1,11 @@
 import {createRouter, createWebHistory} from "vue-router"
 
-const routes = []
+const routes = [
+    {
+        path: "/signup",
+        component: import("~pages/Signup.vue")
+    }
+]
 
 const router = createRouter({
     history: createWebHistory(),

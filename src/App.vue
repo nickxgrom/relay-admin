@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <h1>Welcome to Relay Admin</h1>
+    <RouterView />
 </template>
 
 <style scoped>
