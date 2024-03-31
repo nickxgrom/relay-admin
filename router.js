@@ -4,7 +4,11 @@ const routes = [
     {
         path: "/signup/:organizationId?",
         component: () => import("~pages/Signup.vue")
-    }
+    },
+    {
+        path: "/login/:organizationId?",
+        component: () => import("~pages/Login.vue")
+    },
 ]
 
 const router = createRouter({

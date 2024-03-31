@@ -31,7 +31,7 @@ onMounted(async () => {
 async function submit() {
     errors.value = []
     if (isEmployee.value) {
-        store.employeeSignup(route.params.organizationId)
+        store.employeeLogin(route.params.organizationId)
             .then(() => {
                 router.push("/")
             })
@@ -39,7 +39,7 @@ async function submit() {
                 errors.value.push(err)
             })
     } else {
-        await store.userSignup()
+        await store.userLogin()
             .then(() => {
                 router.push("/")
             })
@@ -47,25 +47,22 @@ async function submit() {
                 errors.value.push(err)
             })
     }
-
 }
 
-const fields = computed(() => {
-    return isEmployee.value ? ["firstName", "email", "password"] : ["firstName", "lastName", "patronymic", "email", "password"]
-})
+const fields = ["email", "password"]
 </script>
 
 <template>
     <div class="wrapper">
         <form>
             <div>
-                <h1 class="text-center mb-2">{{ t('signup.title') }}</h1>
+                <h1 class="text-center mb-2">{{ t('login.title') }}</h1>
                 <div
                     v-if="isEmployee"
                     class="text-center"
                 >
                     <i18n-t
-                        keypath="signup.organizationInfo"
+                        keypath="login.organizationInfo"
                         as="span"
                     >
                         <template #orgName>
@@ -76,10 +73,10 @@ const fields = computed(() => {
                     <div>
                         <router-link
                             class="text-center"
-                            to="/signup"
+                            to="/login"
                         >
                             <Button
-                                :label="t('signup.notOperator')"
+                                :label="t('login.notOperator')"
                                 link
                                 size="small"
                             />
@@ -92,7 +89,7 @@ const fields = computed(() => {
                 :key
                 v-model="store.user[key]"
                 variant="filled"
-                :placeholder="t(`signup.fields.${key}`)"
+                :placeholder="t(`login.fields.${key}`)"
                 :type="key === 'password' ? 'password' : 'text'"
                 class="text-field"
             />
@@ -108,14 +105,14 @@ const fields = computed(() => {
             <div class="flex flex-col">
                 <Button
                     @click="submit"
-                    :label="t('signup.submit')"
+                    :label="t('login.submit')"
                 />
                 <router-link
                     class="text-center"
-                    :to="isEmployee ? `/login/${route.params.organizationId}` : `/login`"
+                    :to="isEmployee ? `/signup/${route.params.organizationId}` : `/signup`"
                 >
                     <Button
-                        :label="t('signup.haveAccount')"
+                        :label="t('login.haveAccount')"
                         link
                     />
                 </router-link>

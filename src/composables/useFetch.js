@@ -17,7 +17,11 @@ export default function (url, options = {}) {
                 } else resolve()
             } else {
                 if (res.status === 401) {
-                    await router.push("/signin")
+                    if (window.location.href.includes("/login")) {
+                        reject(await res?.json())
+                    } else {
+                        await router.push("/login")
+                    }
                 }
 
                 reject(await res?.json())

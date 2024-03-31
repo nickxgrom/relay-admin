@@ -20,11 +20,31 @@ export const useUserStore = defineStore("user", () => {
         })
     }
 
-    function employeeRegistration(orgId) {
+    function userLogin() {
+        return useFetch("/login", {
+            method: "POST",
+            body: {
+                email: user.value.email,
+                password: user.value.password,
+            }
+        })
+    }
+
+    function employeeSignup(orgId) {
         return useFetch(`/employee-registration?organizationId=${orgId}`, {
             method: "POST",
             body: {
                 name: user.value.firstName,
+                email: user.value.email,
+                password: user.value.password
+            }
+        })
+    }
+
+    function employeeLogin(orgId) {
+        return useFetch(`/employee-login/${orgId}`, {
+            method: "POST",
+            body: {
                 email: user.value.email,
                 password: user.value.password
             }
@@ -41,7 +61,9 @@ export const useUserStore = defineStore("user", () => {
     return {
         user,
         userSignup,
-        employeeRegistration,
-        getOrganizationName
+        employeeSignup,
+        getOrganizationName,
+        userLogin,
+        employeeLogin,
     }
 })

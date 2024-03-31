@@ -14,11 +14,24 @@ export default {
         organizationInfo: "Организация {orgName}",
         notOperator: "Регистрация вне организации"
     },
+    login: {
+        title: "Вход",
+        fields: {
+            email: "Электронная почта",
+            password: "Пароль",
+        },
+        submit: "Войти",
+        haveAccount: "Нет аккаунта? Регистрация",
+        organizationInfo: "Организация {orgName}",
+        notOperator: "Вход вне организации"
+    },
     errors: {
         "incorrect-email": "Некорректный адрес электронной почты",
         "email-taken": "Данный адрес электронной почты занят",
         "password-requires-six-character": "Пароль должен содержать 6 символов и более",
         "name-is-required": "Поле 'Имя' обязательно",
+        "employee-not-found": "Пользователь с такой электронной подписью или паролем не найден",
+        "employee-is-not-verified": "Пользователь не подтвержден. Обратитесь к владельцу организации"
 
     }
 }
