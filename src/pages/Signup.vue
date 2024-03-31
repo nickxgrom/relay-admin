@@ -1,27 +1,94 @@
 <script setup>
 import InputText from "primevue/inputtext"
 import Button from "primevue/button"
+import Message from "primevue/message"
 import {useUserStore} from "../store/user.js"
 import {useI18n} from "vue-i18n"
-import {useRouter} from "vue-router"
+import {useRoute, useRouter} from "vue-router"
+import {computed, onMounted, ref} from "vue"
 
 const store = useUserStore()
 
 const {t} = useI18n()
 const router = useRouter()
+const route = useRoute()
+
+const errors = ref([])
+
+const isEmployee = computed(() => !!route.params.organizationId)
+const organizationName = ref("")
+
+onMounted(async () => {
+    if (isEmployee.value) {
+        organizationName.value = await store.getOrganizationName(route.params.organizationId)
+
+        if (!organizationName.value) {
+            router.push("/signup")
+        }
+    }
+})
 
 async function submit() {
-    await store.signup()
-    router.push("/")
+    errors.value = []
+    if (isEmployee.value) {
+        store.employeeRegistration(route.params.organizationId)
+            .then(() => {
+                router.push("/")
+            })
+            .catch(err => {
+                errors.value.push(err)
+            })
+    } else {
+        await store.userSignup()
+            .then(() => {
+                router.push("/")
+            })
+            .catch(err => {
+                errors.value.push(err)
+            })
+    }
+
 }
+
+const fields = computed(() => {
+    return isEmployee.value ? ["firstName", "email", "password"] : ["firstName", "lastName", "patronymic", "email", "password"]
+})
 </script>
 
 <template>
     <div class="wrapper">
         <form>
-            <h1 class="text-center">{{ t('signup.title') }}</h1>
+            <div>
+                <h1 class="text-center mb-2">{{ t('signup.title') }}</h1>
+                <div
+                    v-if="isEmployee"
+                    class="text-center"
+                >
+                    <i18n-t
+                        keypath="signup.organizationInfo"
+                        as="span"
+                    >
+                        <template #orgName>
+                            "{{ organizationName }}"
+                        </template>
+                    </i18n-t>
+
+                    <div>
+                        <router-link
+                            class="text-center"
+                            to="/signup"
+                        >
+                            <Button
+                                :label="t('signup.notOperator')"
+                                link
+                                size="small"
+                            />
+                        </router-link>
+                    </div>
+                </div>
+            </div>
             <InputText
-                v-for="key in Object.keys(store.user)"
+                v-for="key in fields"
                 :key
                 v-model="store.user[key]"
                 variant="filled"
@@ -29,11 +96,30 @@ async function submit() {
                 :type="key === 'password' ? 'password' : 'text'"
                 class="text-field"
             />
-            <Button
-                @click="submit"
-                :label="t('signup.submit')"
-            />
-            <!--            TODO: add link to login-->
+
+            <div v-if="errors.length">
+                <Message
+                    v-for="error in errors"
+                    :key="error.alias"
+                    severity="error"
+                >{{ t(`errors.${error.alias}`) }}</Message>
+            </div>
+
+            <div class="flex flex-col">
+                <Button
+                    @click="submit"
+                    :label="t('signup.submit')"
+                />
+                <router-link
+                    class="text-center"
+                    :to="isEmployee ? `/signin/${route.params.organizationId}` : `/signin`"
+                >
+                    <Button
+                        :label="t('signup.haveAccount')"
+                        link
+                    />
+                </router-link>
+            </div>
         </form>
     </div>
 </template>
@@ -43,7 +129,9 @@ async function submit() {
     @apply flex justify-center items-center h-screen;
 
     form {
-        @apply h-fit py-10 px-16 flex flex-col gap-5 border border-gray-400 rounded-2xl;
+        max-width: 480px;
+
+        @apply w-full h-fit py-10 px-16 flex flex-col gap-5 border border-gray-400 rounded-2xl;
 
         .text-field {
             @apply py-2 px-4;

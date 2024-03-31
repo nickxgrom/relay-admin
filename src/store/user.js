@@ -11,8 +11,8 @@ export const useUserStore = defineStore("user", () => {
         password: ""
     })
 
-    async function signup() {
-        await useFetch("/users", {
+    function userSignup() {
+        return useFetch("/users", {
             method: "POST",
             body: {
                 ...user.value
@@ -20,8 +20,28 @@ export const useUserStore = defineStore("user", () => {
         })
     }
 
+    function employeeRegistration(orgId) {
+        return useFetch(`/employee-registration?organizationId=${orgId}`, {
+            method: "POST",
+            body: {
+                name: user.value.firstName,
+                email: user.value.email,
+                password: user.value.password
+            }
+        })
+    }
+
+
+    function getOrganizationName(orgId) {
+        return useFetch(`/organization-name/${orgId}`)
+            .then(name => name.name)
+            .catch(() => "")
+    }
+
     return {
         user,
-        signup,
+        userSignup,
+        employeeRegistration,
+        getOrganizationName
     }
 })

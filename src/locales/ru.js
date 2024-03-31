@@ -9,6 +9,16 @@ export default {
             email: "Электронная почта",
             password: "Пароль",
         },
-        submit: "Зарегистрироваться"
+        submit: "Зарегистрироваться",
+        haveAccount: "Есть аккаунт? Войти",
+        organizationInfo: "Организация {orgName}",
+        notOperator: "Регистрация вне организации"
+    },
+    errors: {
+        "incorrect-email": "Некорректный адрес электронной почты",
+        "email-taken": "Данный адрес электронной почты занят",
+        "password-requires-six-character": "Пароль должен содержать 6 символов и более",
+        "name-is-required": "Поле 'Имя' обязательно",
+
     }
 }

@@ -2,8 +2,8 @@ import {createRouter, createWebHistory} from "vue-router"
 
 const routes = [
     {
-        path: "/signup",
-        component: import("~pages/Signup.vue")
+        path: "/signup/:organizationId?",
+        component: () => import("~pages/Signup.vue")
     }
 ]
 

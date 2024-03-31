@@ -8,7 +8,7 @@ export default function (url, options = {}) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(options.body ?? {}),
+            body: options.method ? JSON.stringify(options.body ?? {}) : null,
             credentials: "include"
         }).then(async res => {
             if (res.ok) {
@@ -20,7 +20,7 @@ export default function (url, options = {}) {
                     await router.push("/signin")
                 }
 
-                resolve(await res.json())
+                reject(await res?.json())
             }
         }).catch((err) => {
             reject(err)
