@@ -24,8 +24,3 @@ h2 {
 h3 {
     @apply text-xl;
 }
-
-body {
-    min-height: 100vh;
-    /*background: #fafafa;*/
-}
