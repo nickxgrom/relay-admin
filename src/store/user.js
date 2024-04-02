@@ -58,6 +58,10 @@ export const useUserStore = defineStore("user", () => {
             .catch(() => "")
     }
 
+    function getUser() {
+        return useFetch("/users")
+    }
+
     return {
         user,
         userSignup,
@@ -65,5 +69,6 @@ export const useUserStore = defineStore("user", () => {
         getOrganizationName,
         userLogin,
         employeeLogin,
+        getUser,
     }
 })
