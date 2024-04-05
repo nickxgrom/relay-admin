@@ -33,6 +33,7 @@ async function submit() {
     if (isEmployee.value) {
         store.employeeLogin(route.params.organizationId)
             .then(() => {
+                localStorage.setItem("organizationId", route.params.organizationId)
                 router.push("/")
             })
             .catch(err => {

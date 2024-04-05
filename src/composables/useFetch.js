@@ -8,7 +8,7 @@ export default function (url, options = {}) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: options.method ? JSON.stringify(options.body ?? {}) : null,
+            body: options.method ? JSON.stringify(options?.body ?? {}) : null,
             credentials: "include"
         }).then(async res => {
             if (res.ok) {
@@ -20,8 +20,7 @@ export default function (url, options = {}) {
                     if (window.location.href.includes("/login")) {
                         reject(res.headers.get("content-length") > "0" ? await res?.json() : null)
                     } else {
-                        const data = res.headers.get("content-length") > "0" ? await res?.json() : null
-                        await router.push(`/login/${data?.organizationId ?? ""}`)
+                        await router.push(`/login/${localStorage.getItem("organizationId") ?? ""}`)
                     }
                 }
 
