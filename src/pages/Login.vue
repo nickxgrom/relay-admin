@@ -28,7 +28,7 @@ onMounted(async () => {
     }
 })
 
-async function submit() {
+function submit() {
     errors.value = []
     if (isEmployee.value) {
         store.employeeLogin(route.params.organizationId)
@@ -40,7 +40,7 @@ async function submit() {
                 errors.value.push(err)
             })
     } else {
-        await store.userLogin()
+        store.userLogin()
             .then(() => {
                 router.push("/")
             })
