@@ -30,6 +30,16 @@ export default {
         organizationManager: "Менеджер организаций",
         operatorManager: "Менеджер сотрудников",
     },
+    organization: {
+        newOrganizationTitle: "Добавить новую организацию",
+        fields: {
+            name: "Имя организации",
+            description: "Описание",
+            email: "Электронный адрес",
+            address: "Физический адрес",
+        },
+        create: "Создать"
+    },
     errors: {
         "incorrect-email": "Некорректный адрес электронной почты",
         "email-taken": "Данный адрес электронной почты занят",
@@ -37,7 +47,7 @@ export default {
         "name-is-required": "Поле 'Имя' обязательно",
         "employee-not-found": "Пользователь с такой электронной почты или паролем не найден",
         "employee-is-not-verified": "Пользователь не подтвержден. Обратитесь к владельцу организации",
-        "password-or-email-incorrect": "Неверный адрес электронной почты или пароль"
-
+        "password-or-email-incorrect": "Неверный адрес электронной почты или пароль",
+        "name-required": "Поле \"Имя\" обязательнно"
     }
 }
