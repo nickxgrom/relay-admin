@@ -25,6 +25,11 @@ export default {
         organizationInfo: "Организация {orgName}",
         notOperator: "Вход вне организации"
     },
+    navBar: {
+        newOrganization: "Добавить организацию",
+        organizationManager: "Менеджер организаций",
+        operatorManager: "Менеджер сотрудников",
+    },
     errors: {
         "incorrect-email": "Некорректный адрес электронной почты",
         "email-taken": "Данный адрес электронной почты занят",
