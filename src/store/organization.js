@@ -10,11 +10,17 @@ export const useOrganizationStore = defineStore("organization", () => {
         email: ""
     })
 
+    const organizationList = ref([])
+
     function createOrganization() {
         return useFetch("/organization", {
             method: "POST",
             body: organization.value
         })
+    }
+
+    async function getOrganizations() {
+        organizationList.value = [...await useFetch("/organizations", )]
     }
 
     function clear() {
@@ -28,7 +34,9 @@ export const useOrganizationStore = defineStore("organization", () => {
 
     return {
         organization,
+        organizationList,
         createOrganization,
+        getOrganizations,
         clear,
     }
 })

@@ -32,6 +32,7 @@ export default {
     },
     organization: {
         newOrganizationTitle: "Добавить новую организацию",
+        organizationListTitle: "Список организаций",
         fields: {
             name: "Имя организации",
             description: "Описание",
@@ -48,6 +49,6 @@ export default {
         "employee-not-found": "Пользователь с такой электронной почты или паролем не найден",
         "employee-is-not-verified": "Пользователь не подтвержден. Обратитесь к владельцу организации",
         "password-or-email-incorrect": "Неверный адрес электронной почты или пароль",
-        "name-required": "Поле \"Имя\" обязательнно"
+        "name-required": "Поле \"Имя\" обязательно"
     }
 }

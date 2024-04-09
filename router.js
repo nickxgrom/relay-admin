@@ -19,6 +19,10 @@ const routes = [
         path: "/organization/new",
         component: () => import("~pages/NewOrganization.vue")
     },
+    {
+        path: "/organization-manager",
+        component: () => import("~pages/OrganizationList.vue")
+    },
 ]
 
 const router = createRouter({
