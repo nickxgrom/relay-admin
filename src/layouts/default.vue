@@ -30,7 +30,7 @@ const menuItems = computed(() => {
 
 <template>
     <AppHeader/>
-    <div class="flex">
+    <div class="container">
         <div class="card flex justify-content-center">
             <Menu :model="menuItems" >
                 <template #item="{ item, props }">
@@ -52,14 +52,23 @@ const menuItems = computed(() => {
                 </template>
             </Menu>
         </div>
-        <div class="p-5">
+        <div class="content">
             <slot/>
         </div>
     </div>
 </template>
 
 <style scoped>
-div {
-    height: calc(100vh - 48px)
+.container {
+    display: flex;
+    min-height: calc(100vh - 48px);
+    min-width: 100%;
+
+    .content {
+        padding: 20px;
+        width: 100%;
+        height: calc(100vh - 48px);
+        overflow: auto;
+    }
 }
 </style>
