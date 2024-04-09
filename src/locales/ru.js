@@ -33,16 +33,24 @@ export default {
     organization: {
         newOrganizationTitle: "Добавить новую организацию",
         organizationListTitle: "Список организаций",
+        updateOrganizationTitle: "Редактировать организацию",
         fields: {
             name: "Имя организации",
             description: "Описание",
             email: "Электронный адрес",
             address: "Физический адрес",
         },
-        create: "Создать"
+        create: "Создать",
+        update: "Обновить",
+        delete: "Удалить",
+        deleteConfirmation: "Вы действительно хотите удалить данную организацию?",
+        submit: "Да",
+        cancel: "Отмена",
+        confirmAction: "Подтвердите действие",
     },
     errors: {
         "incorrect-email": "Некорректный адрес электронной почты",
+        "email-required": "Поле \"Электронный адрес\" обязательно",
         "email-taken": "Данный адрес электронной почты занят",
         "password-requires-six-character": "Пароль должен содержать 6 символов и более",
         "name-is-required": "Поле 'Имя' обязательно",

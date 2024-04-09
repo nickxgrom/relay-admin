@@ -16,6 +16,10 @@ const routes = [
         component: () => import("~pages/Home.vue")
     },
     {
+        path: "/organization/:id",
+        component: () => import("~pages/Organization.vue")
+    },
+    {
         path: "/organization/new",
         component: () => import("~pages/NewOrganization.vue")
     },

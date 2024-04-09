@@ -15,6 +15,7 @@ const router = useRouter()
 const errors = ref([])
 
 store.clear()
+
 function submit() {
     errors.value = []
 

@@ -19,8 +19,32 @@ export const useOrganizationStore = defineStore("organization", () => {
         })
     }
 
+    function updateOrganization(id) {
+        return useFetch(`/organization/${id}`, {
+            method: "PUT",
+            body: organization.value
+        })
+    }
+
+    async function getOrganizationById(id) {
+        const res = await useFetch(`/organization/${id}`)
+
+        organization.value = {
+            name: res.name,
+            description: res.description,
+            address: res.address,
+            email: res.email
+        }
+    }
+
     async function getOrganizations() {
         organizationList.value = [...await useFetch("/organizations", )]
+    }
+
+    function deleteOrganization(id) {
+        return useFetch(`/organization/${id}`, {
+            method: "DELETE",
+        })
     }
 
     function clear() {
@@ -36,7 +60,10 @@ export const useOrganizationStore = defineStore("organization", () => {
         organization,
         organizationList,
         createOrganization,
+        updateOrganization,
+        getOrganizationById,
         getOrganizations,
+        deleteOrganization,
         clear,
     }
 })

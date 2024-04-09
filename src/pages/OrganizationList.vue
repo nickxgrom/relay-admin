@@ -4,13 +4,16 @@ import {useOrganizationStore} from "../store/organization.js"
 import {onMounted, onUnmounted, ref} from "vue"
 import DataTable from "primevue/datatable"
 import Column from "primevue/column"
+import {useRouter} from "vue-router"
 
 const {t} = useI18n()
 const store = useOrganizationStore()
+const router = useRouter()
 
 const selected = ref()
 
 onMounted(async () => {
+    store.clear()
     await store.getOrganizations()
 })
 
@@ -19,7 +22,7 @@ onUnmounted(() => {
 })
 
 function openOrganization(event) {
-    console.log(event.data.id)
+    router.push(`/organization/${event.data.id}`)
 }
 </script>
 
@@ -48,6 +51,7 @@ function openOrganization(event) {
             field="address"
             :header="t('organization.fields.address')"
         />
+        <!--        TODO: creation date-->
     </DataTable>
 </template>
 
