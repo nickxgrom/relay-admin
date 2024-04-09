@@ -31,8 +31,11 @@ const menuItems = computed(() => {
 <template>
     <AppHeader/>
     <div class="container">
-        <div class="card flex justify-content-center">
-            <Menu :model="menuItems" >
+        <div class="card flex justify-content-center min-w-[260px]">
+            <Menu
+                class="w-full"
+                :model="menuItems"
+            >
                 <template #item="{ item, props }">
                     <router-link
                         v-if="item.route"
