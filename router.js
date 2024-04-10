@@ -27,6 +27,10 @@ const routes = [
         path: "/organization-manager",
         component: () => import("~pages/OrganizationList.vue")
     },
+    {
+        path: "/operator-manager",
+        component: () => import("~pages/EmployeeList.vue")
+    }
 ]
 
 const router = createRouter({
