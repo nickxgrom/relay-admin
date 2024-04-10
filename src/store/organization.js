@@ -7,7 +7,8 @@ export const useOrganizationStore = defineStore("organization", () => {
         name: "",
         description: "",
         address: "",
-        email: ""
+        email: "",
+        createdAt: null,
     })
 
     const organizationList = ref([])
@@ -33,12 +34,17 @@ export const useOrganizationStore = defineStore("organization", () => {
             name: res.name,
             description: res.description,
             address: res.address,
-            email: res.email
+            email: res.email,
+            createdAt: new Date(res.createdAt),
         }
     }
 
     async function getOrganizations() {
-        organizationList.value = [...await useFetch("/organizations", )]
+        const res = await useFetch("/organizations" )
+        organizationList.value = res.map(item => ({
+            ...item,
+            createdAt: new Date(item.createdAt),
+        }))
     }
 
     function deleteOrganization(id) {
@@ -52,7 +58,8 @@ export const useOrganizationStore = defineStore("organization", () => {
             name: "",
             description: "",
             address: "",
-            email: ""
+            email: "",
+            createdAt: null
         }
     }
 
