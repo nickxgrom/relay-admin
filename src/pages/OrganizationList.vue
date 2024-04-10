@@ -51,10 +51,9 @@ function openOrganization(event) {
             field="address"
             :header="t('organization.fields.address')"
         />
-        <!--        Rework: creation date-->
         <Column
             field="createdAt"
-            :header="t('organization.fields.address')"
+            :header="t('organization.fields.creationDate')"
         />
     </DataTable>
 </template>

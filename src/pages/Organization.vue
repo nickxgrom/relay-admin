@@ -47,6 +47,9 @@ function deleteOrganization() {
         })
 }
 
+function copyLink() {
+    navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}/signup/${route.params.id}`)
+}
 </script>
 
 <template>
@@ -80,6 +83,37 @@ function deleteOrganization() {
                 :key="error.alias"
                 severity="error"
             >{{ t(`errors.${error.alias}`) }}</Message>
+        </div>
+
+        <div>
+            <Message
+                class="w-1/3"
+                severity="warn"
+            >
+                <i18n-t
+                    keypath="organization.warning.firstLine"
+                    as="span"
+                >
+                    <template #copyBtn>
+                        <div>
+                            <Button
+                                @click="copyLink"
+                                text
+                                severity="secondary"
+                            >
+                                {{ t('organization.copyLink') }}
+                            </Button>
+                        </div>
+                    </template>
+                </i18n-t>
+            </Message>
+
+            <Message
+                class="w-1/3"
+                severity="warn"
+            >
+                {{t('organization.warning.secondLine')}}
+            </Message>
         </div>
 
         <div class="flex gap-2">

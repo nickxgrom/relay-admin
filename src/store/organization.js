@@ -35,7 +35,7 @@ export const useOrganizationStore = defineStore("organization", () => {
             description: res.description,
             address: res.address,
             email: res.email,
-            createdAt: new Date(res.createdAt),
+            createdAt: new Date(res.createdAt).toDateString(),
         }
     }
 
@@ -43,7 +43,7 @@ export const useOrganizationStore = defineStore("organization", () => {
         const res = await useFetch("/organizations" )
         organizationList.value = res.map(item => ({
             ...item,
-            createdAt: new Date(item.createdAt),
+            createdAt: new Date(item.createdAt).toDateString(),
         }))
     }
 
