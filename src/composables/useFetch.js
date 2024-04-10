@@ -17,7 +17,7 @@ export default function (url, options = {}) {
                 } else resolve()
             } else {
                 if (res.status === 401) {
-                    if (window.location.href.includes("/login")) {
+                    if (window.location.href.includes("/login") || window.location.href.includes("/signup")) {
                         reject(res.headers.get("content-length") > "0" ? await res?.json() : null)
                     } else {
                         await router.push(`/login/${localStorage.getItem("organizationId") ?? ""}`)

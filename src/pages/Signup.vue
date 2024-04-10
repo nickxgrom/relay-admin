@@ -33,7 +33,7 @@ async function submit() {
     if (isEmployee.value) {
         store.employeeSignup(route.params.organizationId)
             .then(() => {
-                router.push("/")
+                router.push(`/login/${route.params.organizationId}`)
             })
             .catch(err => {
                 errors.value.push(err)
