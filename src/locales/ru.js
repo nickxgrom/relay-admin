@@ -56,6 +56,7 @@ export default {
     },
     employee: {
         employeeListTitle: "Список сотрудников",
+        updateEmployeeTitle: "Редактировать сотрудника",
         fields: {
             name: "Имя",
             email: "Электронный адрес",
@@ -63,6 +64,12 @@ export default {
             createdAt: "Дата регистрации",
         },
         noData: "В текущей организации еще не регистрировались сотрудники",
+        warning: "Если Вы не знаете этого сотрудника, то не подтверждайте его аккаунт",
+        update: "Обновить",
+        verified: {
+            yes: "Да",
+            no: "Нет"
+        }
     },
     errors: {
         "incorrect-email": "Некорректный адрес электронной почты",

@@ -30,6 +30,10 @@ const routes = [
     {
         path: "/operator-manager",
         component: () => import("~pages/EmployeeList.vue")
+    },
+    {
+        path: "/employee/:organizationId/:employeeId",
+        component: () => import("~pages/Employee.vue")
     }
 ]
 

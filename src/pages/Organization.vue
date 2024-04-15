@@ -34,7 +34,6 @@ function update() {
         })
 }
 
-
 function deleteOrganization() {
     errors.value = []
 

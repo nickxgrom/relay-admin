@@ -3,6 +3,7 @@ import {useI18n} from "vue-i18n"
 import {onMounted, onUnmounted, ref, watch} from "vue"
 import DataTable from "primevue/datatable"
 import Column from "primevue/column"
+import Tag from "primevue/tag"
 import {useRouter} from "vue-router"
 import {useEmployeeStore} from "../store/employee.js"
 import {useOrganizationStore} from "../store/organization.js"
@@ -16,16 +17,13 @@ const router = useRouter()
 const selectedEmployee = ref()
 const selectedOrganization = ref()
 
-
 onMounted(async () => {
-    if (!organizationStore.organizationList.length) {
-        await organizationStore.getOrganizations()
-    }
+    await organizationStore.getOrganizations()
 
     selectedOrganization.value = organizationStore.organizationList?.[0]
 
     store.clear()
-    await store.getEmployeeList(organizationStore.organization[0])
+    await store.getEmployeeList(selectedOrganization.value.id)
 })
 
 onUnmounted(() => {
@@ -37,7 +35,7 @@ watch(selectedOrganization, async () => {
 })
 
 function openEmployee(event) {
-    router.push(`/employee/${event.data.id}`)
+    router.push(`/employee/${selectedOrganization.value.id}/${event.data.id}`)
 }
 </script>
 
@@ -66,9 +64,14 @@ function openEmployee(event) {
             :header="t('employee.fields.email')"
         />
         <Column
-            field="verified"
             :header="t('employee.fields.verified')"
-        />
+        >
+            <template #body="slotProps">
+                <Tag :severity="slotProps.data.verified ? 'success' : 'danger'">
+                    {{ t(`employee.verified.${slotProps.data.verified ? 'yes' : 'no'}`) }}
+                </Tag>
+            </template>
+        </Column>
         <Column
             field="createdAt"
             :header="t('employee.fields.createdAt')"

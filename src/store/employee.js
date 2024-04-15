@@ -24,9 +24,24 @@ export const useEmployeeStore = defineStore("employee", () => {
         }))
     }
 
-    function getEmployee(id) {}
+    async function getEmployee(organizationId, employeeId) {
+        const res = await useFetch(`/organization/employees/${organizationId}/${employeeId}`)
+        employee.value = {
+            ...res,
+            createdAt: new Date(res.createdAt).toDateString(),
+        }
+    }
 
-    function updateEmployee(id) {}
+    function updateEmployee(organizationId, employeeId) {
+        return useFetch(`/organization/employees/${organizationId}/${employeeId}`, {
+            method: "PUT",
+            body: {
+                name: employee.value.name,
+                email: employee.value.email,
+                verified: employee.value.verified,
+            }
+        })
+    }
 
     function deleteEmployee(id) {}
 
