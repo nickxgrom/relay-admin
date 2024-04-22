@@ -8,7 +8,8 @@ export const useUserStore = defineStore("user", () => {
         lastName: "",
         patronymic: "",
         email: "",
-        password: ""
+        password: "",
+        role: ""
     })
 
     function userSignup() {

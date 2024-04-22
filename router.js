@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from "vue-router"
+import {userRoles} from "./src/constants/userRoles.js"
 
 const routes = [
     {
@@ -12,28 +13,39 @@ const routes = [
         component: () => import("~pages/Login.vue")
     },
     {
+        meta: { layout: "chat" },
         path: "/",
         component: () => import("~pages/Home.vue")
     },
     {
+        meta: { role: userRoles.OWNER },
         path: "/organization/:id",
         component: () => import("~pages/Organization.vue")
     },
     {
+        meta: { role: userRoles.OWNER },
         path: "/organization/new",
         component: () => import("~pages/NewOrganization.vue")
     },
     {
+        meta: { role: userRoles.OWNER },
         path: "/organization-manager",
         component: () => import("~pages/OrganizationList.vue")
     },
     {
+        meta: { role: userRoles.OWNER },
         path: "/operator-manager",
         component: () => import("~pages/EmployeeList.vue")
     },
     {
+        meta: { role: userRoles.OWNER },
         path: "/employee/:organizationId/:employeeId",
         component: () => import("~pages/Employee.vue")
+    },
+    {
+        meta: { layout: "empty" },
+        path: "/not-found",
+        component: () => import("~pages/NotFound.vue")
     }
 ]
 

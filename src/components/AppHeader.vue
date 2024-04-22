@@ -1,9 +1,14 @@
 <script setup>
+import {useUserStore} from "../store/user.js"
+
+const store = useUserStore()
 </script>
 
 <template>
     <div class="wrapper">
         <div class="system-name">Relay Admin</div>
+
+        {{store.user.role}}
     </div>
 </template>
 
