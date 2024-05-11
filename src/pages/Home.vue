@@ -3,14 +3,17 @@ import ChatList from "../components/ChatList.vue"
 </script>
 
 <template>
-    <div class="flex justify-between">
+    <div class="wrapper">
         <ChatList />
 
-        <div>asedf</div>
-        <!--    <CurrentChat />-->
+        <!--        <CurrentChat />-->
     </div>
 </template>
 
 <style scoped>
+.wrapper {
+    @apply flex justify-between;
 
+    height: calc(100vh - 48px);
+}
 </style>
