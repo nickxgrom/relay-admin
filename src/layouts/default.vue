@@ -1,11 +1,12 @@
 <script setup>
 import Menu from "primevue/menu"
-
-import AppHeader from "../components/AppHeader.vue"
 import {computed} from "vue"
 import {useI18n} from "vue-i18n"
+import {useUserStore} from "../store/user.js"
+import AppHeader from "../components/AppHeader.vue"
 
-const {t } = useI18n()
+const { t } = useI18n()
+const userStore = useUserStore()
 
 const menuItems = computed(() => {
     return [
@@ -30,7 +31,10 @@ const menuItems = computed(() => {
 
 <template>
     <AppHeader/>
-    <div class="container">
+    <div
+        class="container"
+        v-if="userStore.user.role"
+    >
         <div class="card flex justify-content-center min-w-[260px]">
             <Menu
                 class="w-full"
