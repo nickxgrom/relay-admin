@@ -31,7 +31,7 @@ onMounted(async () => {
 
 <template>
     <component :is="layout[currentLayout]">
-        <RouterView/>
+        <RouterView />
     </component>
 </template>
 

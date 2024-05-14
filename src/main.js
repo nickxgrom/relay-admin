@@ -23,11 +23,7 @@ const i18n = createI18n({
     }
 })
 
-
-
 app.config.globalProperties.$currentLayout = ref("default")
-
-
 
 app.use(PrimeVue)
     .use(router)
@@ -42,7 +38,7 @@ router.beforeEach((to, from) => {
     app.config.globalProperties.$currentLayout.value = to.meta?.layout ?? "default"
 
     if (to.meta?.role) {
-        if (userStore.user.role !== to.meta.role) {
+        if (userStore.user.role && userStore.user.role !== to.meta.role && !to.meta.force) {
             return { path: "/not-found" } // or any other route you want to redirect to
         }
     }

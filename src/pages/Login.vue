@@ -42,7 +42,7 @@ function submit() {
     } else {
         store.userLogin()
             .then(() => {
-                router.push("/")
+                router.push({ path: "/organization-manager", meta: { force: true } })
             })
             .catch(err => {
                 errors.value.push(err)

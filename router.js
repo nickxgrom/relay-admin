@@ -13,7 +13,7 @@ const routes = [
         component: () => import("~pages/Login.vue")
     },
     {
-        meta: { layout: "chat" },
+        meta: { layout: "chat", role: userRoles.EMPLOYEE },
         path: "/",
         component: () => import("~pages/Home.vue")
     },
