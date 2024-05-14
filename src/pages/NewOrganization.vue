@@ -21,7 +21,7 @@ function submit() {
 
     store.createOrganization()
         .then((res) => {
-            router.push(`/organization-manager/${res.id}`)
+            router.push(`/organization/${res.id}`)
         })
         .catch(err => {
             errors.value.push(err)
