@@ -32,7 +32,7 @@ defineProps({
                 v-if="unreadCount > 0"
                 class="unread-message-count"
             >{{ unreadCount }}</div>
-            <div class="time">{{ time.toLocaleTimeString() }}</div>
+            <div class="time">{{ time }}</div>
         </div>
     </div>
 </template>
