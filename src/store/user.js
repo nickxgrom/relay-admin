@@ -1,6 +1,7 @@
 import {defineStore} from "pinia"
 import {ref} from "vue"
 import useFetch from "../composables/useFetch.js"
+import {userRoles} from "../constants/userRoles.js"
 
 export const useUserStore = defineStore("user", () => {
     const user = ref({
@@ -59,8 +60,10 @@ export const useUserStore = defineStore("user", () => {
             .catch(() => "")
     }
 
-    function getUser() {
-        return useFetch("/users")
+    async function getUser() {
+        const res = await useFetch("/users")
+
+        user.value.role = res.isOwner ? userRoles.OWNER : userRoles.EMPLOYEE
     }
 
     return {

@@ -32,17 +32,19 @@ function submit() {
     errors.value = []
     if (isEmployee.value) {
         store.employeeLogin(route.params.organizationId)
-            .then(() => {
+            .then(async () => {
+                await store.getUser()
                 localStorage.setItem("organizationId", route.params.organizationId)
-                router.push("/")
+                await router.push("/")
             })
             .catch(err => {
                 errors.value.push(err)
             })
     } else {
         store.userLogin()
-            .then(() => {
-                router.push({ path: "/organization-manager", meta: { force: true } })
+            .then(async () => {
+                await store.getUser()
+                await router.push({ path: "/organization-manager", meta: { force: true } })
             })
             .catch(err => {
                 errors.value.push(err)

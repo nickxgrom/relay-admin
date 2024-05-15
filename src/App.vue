@@ -22,9 +22,7 @@ const userStore = useUserStore()
 
 onMounted(async () => {
     // TODO: think about saving name etc
-    const user = await userStore.getUser()
-
-    userStore.user.role = user.isOwner ? userRoles.OWNER : userRoles.EMPLOYEE
+    await userStore.getUser()
 })
 
 </script>
