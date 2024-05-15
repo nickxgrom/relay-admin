@@ -46,7 +46,7 @@ function openEmployee(event) {
         v-model="selectedOrganization"
         :options="organizationStore.organizationList"
         option-label="name"
-    ></Dropdown>
+    />
 
     <DataTable
         v-if="store.employeeList.length"

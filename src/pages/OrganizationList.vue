@@ -5,6 +5,7 @@ import {onMounted, onUnmounted, ref} from "vue"
 import DataTable from "primevue/datatable"
 import Column from "primevue/column"
 import {useRouter} from "vue-router"
+import Button from "primevue/button"
 
 const {t} = useI18n()
 const store = useOrganizationStore()
@@ -30,6 +31,7 @@ function openOrganization(event) {
     <h1 class="mb-5">{{ t('organization.organizationListTitle') }}</h1>
 
     <DataTable
+        v-if="store.organizationList.length"
         v-model:selection="selected"
         selection-mode="single"
         :value="store.organizationList"
@@ -56,6 +58,25 @@ function openOrganization(event) {
             :header="t('organization.fields.creationDate')"
         />
     </DataTable>
+
+    <div
+        v-else
+        class="flex flex-col gap-4 items-center"
+    >
+        <img
+            width="200px"
+            src="/nodata.svg"
+            alt=""
+        >
+        {{ t('organization.noData') }}
+
+        <Button
+            @click="router.push('/organization/new')"
+            class="w-fit"
+        >
+            {{ t(`organization.newOrganizationTitle`) }}
+        </Button>
+    </div>
 </template>
 
 <style scoped>

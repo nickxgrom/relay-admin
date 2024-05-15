@@ -47,7 +47,7 @@ function deleteOrganization() {
 }
 
 function copyLink() {
-    navigator.clipboard.writeText(`${import.meta.env.VITE_API_HOST}/signup/${route.params.id}`)
+    navigator.clipboard.writeText(`${import.meta.env.VITE_ORIGIN}/signup/${route.params.id}`)
 }
 </script>
 
