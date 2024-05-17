@@ -29,6 +29,7 @@ socket.addEventListener("message", (event) => {
     console.log(event.data)
     const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data
     if (data != null) {
+        // TODO: при отправке клиентом нескольких сообщений - считает их разными чатами
         chatList.value.push(...data)
         console.log(chatList.value)
     }
@@ -48,14 +49,18 @@ socket.addEventListener("error", (event) => {
 <template>
     <div class="chat-list">
         <ChatCard
-            v-for="chat in chatList"
+            v-if="chatList.length"
+            v-for="(chat, i) in chatList"
             :key="chat.key"
             :chat-id="chat.key"
-            :title="`Клиент ${chat.key}`"
+            :title="`Клиент ${i + 1}`"
             :message="chat.lastMessage?.text"
             :unread-count="5"
             :time="new Date(chat.lastMessage?.createdAt).toLocaleTimeString()"
         />
+        <div v-else>
+            Пока нет активных чатов
+        </div>
     </div>
 </template>
 
