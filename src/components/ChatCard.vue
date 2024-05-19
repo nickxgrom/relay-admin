@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
     chatId: {
-        type: Number,
+        type: String,
         required: true
     },
     title: {

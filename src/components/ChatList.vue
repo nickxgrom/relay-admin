@@ -1,6 +1,6 @@
 <script setup>
 import ChatCard from "./ChatCard.vue"
-import {ref} from "vue"
+import {reactive, ref} from "vue"
 
 const chatListPort = import.meta.env.VITE_CHAT_LIST_PORT
 
@@ -14,7 +14,7 @@ function getCookie(name) {
 
 relayToken.value = getCookie("relay-token")
 
-const chatList = ref([])
+const chatList = reactive(new Map())
 
 // Establish a connection to the WebSocket.
 const socket = new WebSocket(`ws://localhost:${chatListPort}?relay-token=${relayToken.value}`)
@@ -26,12 +26,13 @@ socket.addEventListener("open", (event) => {
 
 // Listen for messages
 socket.addEventListener("message", (event) => {
-    console.log(event.data)
     const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data
     if (data != null) {
-        // TODO: при отправке клиентом нескольких сообщений - считает их разными чатами
-        chatList.value.push(...data)
-        console.log(chatList.value)
+        data.forEach((item) => {
+            const unreadCount = chatList.has(item.key) ? chatList.get(item.key).unreadCount + 1 : 0
+            chatList.delete(item.key)
+            chatList.set(item.key, { lastMessage: item.lastMessage, unreadCount })
+        })
     }
 })
 
@@ -48,16 +49,19 @@ socket.addEventListener("error", (event) => {
 
 <template>
     <div class="chat-list">
-        <ChatCard
-            v-if="chatList.length"
-            v-for="(chat, i) in chatList"
-            :key="chat.key"
-            :chat-id="chat.key"
-            :title="`Клиент ${i + 1}`"
-            :message="chat.lastMessage?.text"
-            :unread-count="5"
-            :time="new Date(chat.lastMessage?.createdAt).toLocaleTimeString()"
-        />
+        <div
+            v-if="chatList.size"
+        >
+            <ChatCard
+                v-for="([key, chat], i) in chatList.entries()"
+                :key="key"
+                :chat-id="key"
+                :title="`Клиент ${i + 1}`"
+                :message="chat.lastMessage?.text"
+                :unread-count="chat.unreadCount"
+                :time="new Date(chat.lastMessage?.createdAt).toLocaleTimeString()"
+            />
+        </div>
         <div v-else>
             Пока нет активных чатов
         </div>
