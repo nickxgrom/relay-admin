@@ -1,4 +1,6 @@
 <script setup>
+import {useRouter} from "vue-router"
+
 defineProps({
     chatId: {
         type: String,
@@ -19,10 +21,19 @@ defineProps({
         default: 0
     }
 })
+
+const router = useRouter()
+
+function openChat(chatId) {
+    router.push(`/chat/${chatId}`)
+}
 </script>
 
 <template>
-    <div class="chat-card">
+    <div
+        @click="openChat(chatId)"
+        class="chat-card"
+    >
         <div class="flex flex-col w-2/3">
             <div class="title">{{ title }}</div>
             <div class="message">{{ message }}</div>

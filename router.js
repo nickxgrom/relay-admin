@@ -14,8 +14,8 @@ const routes = [
     },
     {
         meta: { layout: "chat", role: userRoles.EMPLOYEE },
-        path: "/",
-        component: () => import("~pages/Home.vue")
+        path: "/chat/:chatId?",
+        component: () => import("~pages/Chat.vue")
     },
     {
         meta: { role: userRoles.OWNER },
