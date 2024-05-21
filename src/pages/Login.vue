@@ -35,7 +35,7 @@ function submit() {
             .then(async () => {
                 await store.getUser()
                 localStorage.setItem("organizationId", route.params.organizationId)
-                await router.push("/")
+                await router.push("/chat")
             })
             .catch(err => {
                 errors.value.push(err)
@@ -95,6 +95,7 @@ const fields = ["email", "password"]
                 :placeholder="t(`login.fields.${key}`)"
                 :type="key === 'password' ? 'password' : 'text'"
                 class="text-field"
+                @keydown.enter="key === 'password' ? submit() : null"
             />
 
             <div v-if="errors.length">

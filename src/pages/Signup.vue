@@ -96,6 +96,7 @@ const fields = computed(() => {
                 :placeholder="t(`signup.fields.${key}`)"
                 :type="key === 'password' ? 'password' : 'text'"
                 class="text-field"
+                @keydown.enter="key === 'password' ? submit() : null"
             />
 
             <div v-if="errors.length">
